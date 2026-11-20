@@ -1,0 +1,4 @@
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.job{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:14px 16px;margin-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:center}
+.job.closed{border-left-color:var(--line);opacity:.65}
+.job h3{margin:0;font-size:1.1rem}

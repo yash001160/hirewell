@@ -1,0 +1,8 @@
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:1.8rem;font-weight:800;line-height:1.1}
+.stat span{color:var(--muted);font-size:.88rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.row{display:grid;grid-template-columns:110px 1fr 28px;gap:10px;align-items:center;margin:7px 0;font-size:.92rem}
+.track{background:var(--bg);border-radius:99px;height:12px;overflow:hidden}
+.fill{height:100%;background:var(--accent);border-radius:99px;transition:width .4s}

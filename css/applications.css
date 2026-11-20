@@ -1,0 +1,6 @@
+.app{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.app header{all:unset;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.steps{display:flex;gap:4px;margin:12px 0 8px}
+.steps span{flex:1;height:8px;border-radius:4px;background:var(--line)}
+.steps span.on{background:var(--accent)}
+.steps.rej span.on{background:var(--bad)}

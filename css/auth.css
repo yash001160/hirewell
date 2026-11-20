@@ -1,0 +1,22 @@
+#auth{min-height:100vh;display:grid;place-items:center;padding:20px 16px}
+.authcard{display:grid;grid-template-columns:1fr 1.15fr;width:min(880px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.aside{background:var(--accent);color:var(--accent-ink);padding:32px 28px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.aside .brand{font-size:1.35rem}
+.aside h2{font-size:1.8rem;line-height:1.15;letter-spacing:-.02em;margin:0}
+.aside p{margin:0 0 8px;opacity:.92}
+.authform{padding:28px}
+.tabs{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px;margin-bottom:18px}
+.tabs button{flex:1;border:0;background:none;color:var(--muted);font:600 .95rem inherit;font-family:inherit;padding:8px;border-radius:7px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.field{margin-bottom:12px}
+.field .err{margin-top:2px}
+.meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;width:0;transition:width .2s,background .2s}
+.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rolepick label{border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer;font-weight:400;margin:0;display:flex;gap:8px;align-items:flex-start;font-size:.88rem}
+.rolepick label b{display:block;font-size:.95rem}
+.rolepick input{width:auto;margin-top:4px}
+.check{display:flex;gap:8px;align-items:center;font-weight:400;font-size:.9rem;margin:4px 0 14px}
+.check input{width:auto}
+.userchip{display:flex;gap:10px;align-items:center;font-size:.9rem;color:var(--muted)}
+@media (max-width:760px){.authcard{grid-template-columns:1fr}.aside{padding:20px;gap:12px}.aside h2{font-size:1.4rem}.authform{padding:20px}}

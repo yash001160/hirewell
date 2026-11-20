@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hirewell – Job Board Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/jobs.css">
+<link rel="stylesheet" href="css/applications.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div id="auth"><div class="authcard">
+ <div class="aside">
+  <div class="brand">Hirewell</div>
+  <h2>Hiring and job hunting, in one place.</h2>
+  <div><p><b>Job seekers</b> search roles, apply and follow every application.</p><p><b>Employers</b> post jobs and move applicants through each stage.</p></div>
+ </div>
+ <div class="authform">
+  <div class="tabs" role="tablist"><button type="button" role="tab" id="tLogin" aria-selected="true">Sign in</button><button type="button" role="tab" id="tReg" aria-selected="false">Create account</button></div>
+  <form id="loginForm" novalidate>
+   <div class="field"><label for="lEmail">Email</label><input id="lEmail" type="email" autocomplete="email"><div class="err" data-e="lEmail"></div></div>
+   <div class="field"><label for="lPw">Password</label><input id="lPw" class="pw" type="password" autocomplete="current-password"><div class="err" data-e="lPw"></div></div>
+   <label class="check"><input type="checkbox" class="showpw"> Show password</label>
+   <div class="err" data-e="lMsg"></div>
+   <button class="btn" style="width:100%" type="submit">Sign in</button>
+   <p class="sub" style="margin:14px 0 0;text-align:center">New here? <a href="#" id="toReg" style="color:var(--accent)">Create an account</a></p>
+  </form>
+  <form id="regForm" class="hidden" novalidate>
+   <div class="field"><label for="rName">Full name</label><input id="rName" maxlength="60" autocomplete="name"><div class="err" data-e="rName"></div></div>
+   <div class="field"><label for="rEmail">Email</label><input id="rEmail" type="email" autocomplete="email"><div class="err" data-e="rEmail"></div></div>
+   <div class="field"><label>I am a</label><div class="rolepick">
+    <label><input type="radio" name="role" value="seeker" checked><span><b>Job seeker</b>Search and apply</span></label>
+    <label><input type="radio" name="role" value="employer"><span><b>Employer</b>Post and review</span></label></div></div>
+   <div class="field"><label for="rPw">Password</label><input id="rPw" class="pw" type="password" autocomplete="new-password"><div class="meter"><i id="meter"></i></div><div class="err" data-e="rPw"></div></div>
+   <div class="field"><label for="rPw2">Confirm password</label><input id="rPw2" class="pw" type="password" autocomplete="new-password"><div class="err" data-e="rPw2"></div></div>
+   <label class="check"><input type="checkbox" class="showpw"> Show passwords</label>
+   <button class="btn" style="width:100%" type="submit">Create account</button>
+   <p class="sub" style="margin:14px 0 0;text-align:center">Already registered? <a href="#" id="toLogin" style="color:var(--accent)">Sign in</a></p>
+  </form>
+ </div>
+</div></div>
+<div id="shell" class="hidden"><header><div class="bar">
+  <div class="brand">Hire<i>well</i></div>
+  <nav id="nav" role="tablist">
+    <button role="tab" data-v="jobs" aria-selected="true">Find jobs</button>
+    <button role="tab" data-v="apps" aria-selected="false">My applications<span class="badge" id="appBadge">0</span></button>
+    <button role="tab" data-v="post" aria-selected="false">Post a job</button>
+    <button role="tab" data-v="stats" aria-selected="false">Overview</button>
+  </nav>
+  <div class="userchip"><span id="uName"></span><button class="btn ghost sm" id="logout" type="button">Log out</button></div>
+</div></header>
+
+<main>
+<section id="v-jobs">
+  <h1>Find your next role</h1>
+  <p class="sub">Search open positions, narrow by category, and apply in one step.</p>
+  <div class="filters">
+    <input id="q" type="search" placeholder="Search title, company or skill" aria-label="Search jobs">
+    <select id="fType" aria-label="Job type"><option value="">All job types</option></select>
+    <select id="fLoc" aria-label="Location"><option value="">All locations</option></select>
+    <select id="fSort" aria-label="Sort"><option value="new">Newest first</option><option value="sal">Highest salary</option><option value="az">Title A–Z</option></select>
+  </div>
+  <div class="chips" id="cats" aria-label="Categories"></div>
+  <div class="count" id="count"></div>
+  <div id="jobList"></div>
+</section>
+
+<section id="v-apps" class="hidden">
+  <h1>My applications</h1>
+  <p class="sub">Track every application from submission to offer.</p>
+  <div class="chips" id="stageChips"></div>
+  <div id="appList"></div>
+</section>
+
+<section id="v-post" class="hidden">
+  <h1>Post a job</h1>
+  <p class="sub">Add a new opening or update an existing one.</p>
+  <form class="panel form" id="jobForm" novalidate>
+    <input type="hidden" id="jId">
+    <div><label for="jTitle">Job title *</label><input id="jTitle" maxlength="80"><div class="err" data-e="jTitle"></div></div>
+    <div><label for="jCompany">Company *</label><input id="jCompany" maxlength="60"><div class="err" data-e="jCompany"></div></div>
+    <div><label for="jCat">Category *</label><select id="jCat"></select></div>
+    <div><label for="jType">Job type *</label><select id="jType"><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option><option>Remote</option></select></div>
+    <div><label for="jLoc">Location *</label><input id="jLoc" maxlength="60" placeholder="City or Remote"><div class="err" data-e="jLoc"></div></div>
+    <div><label for="jSal">Annual salary (USD) *</label><input id="jSal" type="number" min="0" step="1000"><div class="err" data-e="jSal"></div></div>
+    <div class="full"><label for="jDesc">Description *</label><textarea id="jDesc" rows="4" maxlength="800"></textarea><div class="err" data-e="jDesc"></div></div>
+    <div class="full"><button class="btn" id="jSave" type="submit">Publish job</button> <button class="btn ghost hidden" id="jCancel" type="button">Cancel edit</button></div>
+  </form>
+  <h2>Your postings</h2>
+  <div class="panel tablewrap"><table><thead><tr><th>Title</th><th>Category</th><th>Applicants</th><th>Status</th><th>Actions</th></tr></thead><tbody id="mine"></tbody></table></div>
+</section>
+
+<section id="v-stats" class="hidden">
+  <h1>Overview</h1>
+  <p class="sub">A live summary of postings and application progress.</p>
+  <div class="stats" id="statCards"></div>
+  <div class="two">
+    <div class="panel"><h2>Applications by stage</h2><div id="stageBars"></div></div>
+    <div class="panel"><h2>Open jobs by category</h2><div id="catBars"></div></div>
+  </div>
+</section>
+</main></div>
+
+<dialog id="dlg"><div id="dlgBody"></div></dialog>
+<div class="toast hidden" id="toast" role="status"></div>
+
+<!-- core -->
+<script src="js/core/bus.js"></script>
+<script src="js/core/storage.js"></script>
+<script src="js/core/utils.js"></script>
+<!-- services: data + business rules, no DOM -->
+<script src="js/services/auth.service.js"></script>
+<script src="js/services/job.service.js"></script>
+<script src="js/services/application.service.js"></script>
+<script src="js/services/stats.service.js"></script>
+<!-- ui: one module per screen -->
+<script src="js/ui/shell.js"></script>
+<script src="js/ui/dialog.js"></script>
+<script src="js/ui/auth.ui.js"></script>
+<script src="js/ui/jobs.ui.js"></script>
+<script src="js/ui/applications.ui.js"></script>
+<script src="js/ui/post.ui.js"></script>
+<script src="js/ui/dashboard.ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

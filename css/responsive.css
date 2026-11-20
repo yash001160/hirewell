@@ -1,0 +1,1 @@
+@media (max-width:760px){.filters{grid-template-columns:1fr 1fr}.filters :first-child{grid-column:1/-1}.stats{grid-template-columns:1fr 1fr}.two,.form{grid-template-columns:1fr}.job{grid-template-columns:1fr}nav{margin-left:0;width:100%}}

@@ -1,0 +1,10 @@
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1{font-size:1.9rem;letter-spacing:-.02em;margin:.2em 0 .1em;font-weight:800}
+h2{font-size:1.15rem;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 18px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+label{display:block;font-weight:600;font-size:.9rem;margin-bottom:4px}
+.hidden{display:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
